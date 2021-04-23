@@ -1,23 +1,21 @@
 
 def call(Map args = [:]) {
     stage("Semantic release") {
-        agent {
-            kubernetes {
-                label "semantic-release"
-                yaml """
-                    apiVersion: v1
-                    kind: Pod
-                    spec:
-                      containers:
-                      - name: container
-                        image: artifactory.datapwn.com/docker-io-remote/node
-                        command:
-                        - cat
-                        tty: true
-                      imagePullSecrets:
-                      - talend-registry
-                """
-            }
+        kubernetes {
+            label "semantic-release"
+            yaml """
+                apiVersion: v1
+                kind: Pod
+                spec:
+                  containers:
+                  - name: container
+                    image: artifactory.datapwn.com/docker-io-remote/node
+                    command:
+                    - cat
+                    tty: true
+                  imagePullSecrets:
+                  - talend-registry
+            """
         }
         environment {
             GH_TOKEN  = credentials('continuous-delivery')
