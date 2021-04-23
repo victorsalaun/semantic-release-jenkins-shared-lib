@@ -1,7 +1,8 @@
 def call(Map args = [:]) {
 
     withCredentials([string(credentialsId: 'continuous-delivery', variable: 'GH_TOKEN')]) {
-        podTemplate(yaml: """\
+        podTemplate(label: "semantic-release",
+                yaml: """\
             apiVersion: v1
             kind: Pod
             spec:
