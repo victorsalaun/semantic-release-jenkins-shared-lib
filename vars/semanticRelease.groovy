@@ -20,15 +20,13 @@ def call(Map args = [:]) {
         environment {
             GH_TOKEN  = credentials('continuous-delivery')
         }
-        steps {
-            container("container") {
-                script {
-                    echo "semantic-release"
-                    sh """
-                        npm i -D semantic-release @semantic-release/changelog @semantic-release/git
-                        npx semantic-release
-                    """
-                }
+        container("container") {
+            script {
+                echo "semantic-release"
+                sh """
+                    npm i -D semantic-release @semantic-release/changelog @semantic-release/git
+                    npx semantic-release
+                """
             }
         }
     }
